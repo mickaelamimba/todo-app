@@ -33,4 +33,16 @@ describe('Crud operation', () => {
         expect(update.statusCode).toEqual(200)
         expect(update.body.tasks.name).toEqual('my test task update')
     })
+    it('delete  a task',async ()=>{
+        const res = await request(app)
+            .post('/api/v1/tasks').send({
+                name:'my test task'
+            })
+        expect(res.statusCode).toEqual(201)
+
+        const deleteTask  = await request(app)
+            .delete(`/api/v1/tasks/${res.body.tasks._id}`)
+        expect(deleteTask.statusCode).toEqual(200)
+        expect(deleteTask.body.status).toEqual('success')
+    })
 })

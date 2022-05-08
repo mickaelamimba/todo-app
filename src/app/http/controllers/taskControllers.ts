@@ -77,4 +77,23 @@ export default class TaskControllers {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg:err,status:'error'})
         }
     }
+
+    /**
+     * delete a task
+     * @param req
+     * @param res
+     */
+    static async deleteTask(req: Request, res: Response){
+        try {
+            const {id:paramsId}= req.params
+            const tasks= await Task.findOneAndDelete({_id:paramsId})
+            if (!paramsId){
+                res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
+            }
+            res.status(StatusCodes.OK).json({tasks:null,status:'success'})
+
+        }catch (err) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg:err,status:'error'})
+        }
+    }
 }
