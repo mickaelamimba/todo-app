@@ -31,8 +31,8 @@ export default class TaskControllers {
         try {
             const {id:paramsId}= req.params
             const tasks= await Task.findOne({_id:paramsId})
-            if (!paramsId){
-                res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
+            if (!tasks){
+                return res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
             }
             res.status(StatusCodes.OK).json({tasks,status:'success'})
 
@@ -68,8 +68,8 @@ export default class TaskControllers {
                 new:true,
                 runValidators:true
             })
-            if (!paramsId){
-                res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
+            if (!tasks){
+                return res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
             }
             res.status(StatusCodes.OK).json({tasks,status:'success'})
 
@@ -87,8 +87,8 @@ export default class TaskControllers {
         try {
             const {id:paramsId}= req.params
             const tasks= await Task.findOneAndDelete({_id:paramsId})
-            if (!paramsId){
-                res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
+            if (!tasks){
+             return res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
             }
             res.status(StatusCodes.OK).json({tasks:null,status:'success'})
 
