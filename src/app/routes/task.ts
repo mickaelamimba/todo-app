@@ -3,5 +3,5 @@ import {Router} from "express/ts4.0";
 import TaskControllers from "../http/controllers/taskControllers";
 const route :Router = express.Router()
 route.route('/').get(TaskControllers.getAllTask).post(TaskControllers.createTask)
-route.route('/:id').get(TaskControllers.getTask)
+route.route('/:id').get(TaskControllers.getTask).put(TaskControllers.updateTask)
 export default route

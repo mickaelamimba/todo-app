@@ -48,9 +48,30 @@ export default class TaskControllers {
      */
     static async createTask(req: Request, res: Response){
         try {
-            const {id:paramsId}= req.params
             const tasks= await Task.create(req.body)
             res.status(StatusCodes.CREATED).json({tasks,status:'success'})
+
+        }catch (err) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg:err,status:'error'})
+        }
+    }
+
+    /**
+     *  Update a task
+     * @param req
+     * @param res
+     */
+    static async updateTask(req: Request, res: Response){
+        try {
+            const {id:paramsId}= req.params
+            const tasks= await Task.findOneAndUpdate({_id:paramsId},req.body,{
+                new:true,
+                runValidators:true
+            })
+            if (!paramsId){
+                res.status(StatusCodes.NOT_FOUND).json({tasks:null,status:'not_found'})
+            }
+            res.status(StatusCodes.OK).json({tasks,status:'success'})
 
         }catch (err) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg:err,status:'error'})

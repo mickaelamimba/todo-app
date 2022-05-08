@@ -1,6 +1,6 @@
 {
   "name": "todo-app",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "index.js",
   "repository": "https://github.com/mickaelamimba/todo-app.git",
   "author": "AMIMBA Mickael <mickael.amimba@gmail.com>",
